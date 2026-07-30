@@ -9,6 +9,9 @@ svg.viewbox(0,0,1000,1000);
 
 const rectBtn=document.getElementById("rectTool");
 const selectBtn=document.getElementById("selectTool");
+const deleteBtn=document.getElementById("deleteTool");
+
+let selectedShape = null;
 
 let tool="select";
 

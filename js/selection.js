@@ -35,7 +35,17 @@ function selectShape(shape) {
 
 deleteBtn.onclick = () => {
 
-    if (!selectedShape) return;
+    console.log("Delete Clicked");
+
+    console.log(selectedShape);
+
+    if (!selectedShape) {
+
+        alert("No Shape Selected");
+
+        return;
+
+    }
 
     selectedShape.remove();
 

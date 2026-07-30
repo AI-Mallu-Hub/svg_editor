@@ -82,18 +82,18 @@ width:2
 
 r.draggable(false);
 
-r.on("click",function(ev){
+r.on("click", function (ev) {
 
-ev.stopPropagation();
+    ev.stopPropagation();
 
-if(tool!=="select") return;
+    if (tool !== "select") return;
 
-this.front();
+    this.front();
+
+    selectShape(this);
 
 });
-
-});
-
+    
 function deselectAll() {
 
     svg.each(function () {

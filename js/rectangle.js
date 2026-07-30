@@ -22,7 +22,7 @@ svg.on("click", (e) => {
             color:"#1565c0",
             width:2
         });
-
+registerShape(rect,"rectangle");
     attachShapeEvents(rect);
 
 });

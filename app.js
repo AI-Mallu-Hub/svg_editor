@@ -65,26 +65,42 @@ rectBtn.onclick = () => {
 
 };
 
-svg.on("click",(e)=>{
+svg.on("click", (e) => {
 
-if(tool!=="rect") return;
-if (tool === "select") {
+    // Select mode
+    if (tool === "select") {
+        deselectAll();
+        return;
+    }
 
-    deselectAll();
+    // Drawing mode
+    if (tool !== "rect") return;
 
-    return;
+    const p = svg.point(e.clientX, e.clientY);
 
-}
+    const r = svg.rect(120, 80)
+        .move(p.x - 60, p.y - 40)
+        .radius(8)
+        .fill("#64b5f6")
+        .stroke({
+            color: "#1565c0",
+            width: 2
+        });
 
-const p=svg.point(e.clientX,e.clientY);
+    r.draggable(false);
 
-const r=svg.rect(120,80)
-.move(p.x-60,p.y-40)
-.radius(8)
-.fill("#64b5f6")
-.stroke({
-color:"#1565c0",
-width:2
+    r.on("click", function (ev) {
+
+        ev.stopPropagation();
+
+        if (tool !== "select") return;
+
+        this.front();
+
+        selectShape(this);
+
+    });
+
 });
 
 r.draggable(false);

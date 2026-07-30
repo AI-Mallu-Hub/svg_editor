@@ -37,16 +37,16 @@ svg.on("click", (e) => {
 
     rect.draggable(false);
 
-    rect.on("click", function (ev) {
+    rect.on("pointerdown", function (ev) {
 
-        ev.stopPropagation();
+    if (currentTool !== "select") return;
 
-        if (currentTool !== "select") return;
+    ev.stopPropagation();
 
-        this.front();
+    this.front();
 
-        selectShape(this);
+    selectShape(this);
 
-    });
+});
 
 });

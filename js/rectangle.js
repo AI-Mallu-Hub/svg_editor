@@ -49,3 +49,21 @@ function attachShapeEvents(shape){
     });
 
 }
+window.addEventListener("pointermove",(e)=>{
+
+    if(!dragging) return;
+
+    if(!activeShape) return;
+
+    const dx=e.clientX-startX;
+
+    const dy=e.clientY-startY;
+
+    activeShape.move(shapeX+dx,shapeY+dy);
+
+});
+window.addEventListener("pointerup",()=>{
+
+    dragging=false;
+
+});

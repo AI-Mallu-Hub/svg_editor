@@ -34,9 +34,9 @@ function attachShapeEvents(shape){
 
         e.stopPropagation();
 
-        activeShape=this;
-
         selectShape(this);
+
+        activeShape = this;
 
         dragging=true;
 

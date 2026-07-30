@@ -1,3 +1,14 @@
+let resizing = false;
+
+let resizeHandle = null;
+
+let resizeShape = null;
+
+let startWidth = 0;
+let startHeight = 0;
+
+let startPointerX = 0;
+let startPointerY = 0;
 
 let handles = [];
 

@@ -26,19 +26,39 @@ btn.style.background="#90caf9";
 
 }
 
-selectBtn.onclick=()=>{
+selectBtn.onclick = () => {
 
-tool="select";
+    tool = "select";
 
-highlight(selectBtn);
+    highlight(selectBtn);
+
+    svg.each(function () {
+
+        if (this.type === "rect") {
+
+            this.draggable(true);
+
+        }
+
+    });
 
 };
 
-rectBtn.onclick=()=>{
+rectBtn.onclick = () => {
 
-tool="rect";
+    tool = "rect";
 
-highlight(rectBtn);
+    highlight(rectBtn);
+
+    svg.each(function () {
+
+        if (this.type === "rect") {
+
+            this.draggable(false);
+
+        }
+
+    });
 
 };
 
@@ -57,7 +77,7 @@ color:"#1565c0",
 width:2
 });
 
-r.draggable();
+r.draggable(false);
 
 r.on("click",function(ev){
 

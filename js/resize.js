@@ -22,6 +22,29 @@ function createHandles() {
                 color: "#1e88e5",
                 width: 2
             });
+        h.data("index", i);
+
+h.on("pointerdown", function (e) {
+
+    e.stopPropagation();
+
+    if (!selectedShape) return;
+
+    resizing = true;
+
+    resizeHandle = this.data("index");
+
+    resizeShape = selectedShape;
+
+    startWidth = resizeShape.width();
+
+    startHeight = resizeShape.height();
+
+    startPointerX = e.clientX;
+
+    startPointerY = e.clientY;
+
+});
 
         h.hide();
 
@@ -50,3 +73,29 @@ function hideHandles() {
     handles.forEach(h => h.hide());
 
 }
+window.addEventListener("pointermove", (e) => {
+
+    if (!resizing) return;
+
+    if (!resizeShape) return;
+
+    if (resizeHandle !== 3) return;
+
+    const dx = e.clientX - startPointerX;
+
+    const dy = e.clientY - startPointerY;
+
+    resizeShape.width(Math.max(20, startWidth + dx));
+
+    resizeShape.height(Math.max(20, startHeight + dy));
+
+    updateHandles(resizeShape);
+
+});
+window.addEventListener("pointerup", () => {
+
+    resizing = false;
+
+    resizeShape = null;
+
+});

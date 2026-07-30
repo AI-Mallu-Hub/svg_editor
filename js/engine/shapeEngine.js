@@ -1,27 +1,84 @@
-const shapes = [];
+/*
+========================================
+SVG Studio
+Version : 3.0
+Module  : Shape Engine
+========================================
+*/
 
-function registerShape(shape, type) {
+const ShapeEngine = {
 
-    shape.data("type", type);
+    shapes: [],
 
-    shape.data("id", Date.now() + "-" + Math.random());
+    nextId: 1,
 
-    shapes.push(shape);
+    register(shape, type) {
 
-}
-function unregisterShape(shape){
+        const id = this.nextId++;
 
-    const index = shapes.indexOf(shape);
+        shape.data("id", id);
+        shape.data("type", type);
 
-    if(index>=0){
+        this.shapes.push(shape);
 
-        shapes.splice(index,1);
+        return id;
+
+    },
+
+    unregister(shape) {
+
+        this.shapes = this.shapes.filter(s => s !== shape);
+
+    },
+
+    getById(id) {
+
+        return this.shapes.find(s => s.data("id") === id);
+
+    },
+
+    getAll() {
+
+        return this.shapes;
+
+    },
+
+    count() {
+
+        return this.shapes.length;
+
+    },
+
+    clear() {
+
+        this.shapes = [];
+
+        this.nextId = 1;
 
     }
 
-}
-function getAllShapes(){
+};
 
-    return shapes;
+
+/* ------------------------------------
+Compatibility Layer
+(Old code continues to work)
+------------------------------------ */
+
+function registerShape(shape, type) {
+
+    return ShapeEngine.register(shape, type);
+
+}
+
+function unregisterShape(shape) {
+
+    ShapeEngine.unregister(shape);
+
+}
+
+function getAllShapes() {
+
+    return ShapeEngine.getAll();
 
 }

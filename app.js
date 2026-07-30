@@ -1,51 +1,72 @@
-// ===== SVG EDITOR - PART 3 =====
+// =============================
+// SVG Editor - Part 4
+// Select + Drag
+// =============================
 
-const svg = document.getElementById("canvas");
-const rectTool = document.getElementById("rectTool");
+const svg = SVG("#canvas");
 
-svg.setAttribute("viewBox", "0 0 1000 1000");
+svg.viewbox(0,0,1000,1000);
 
-let currentTool = "select";
+const rectBtn=document.getElementById("rectTool");
+const selectBtn=document.getElementById("selectTool");
 
-// Tool Selection
-rectTool.addEventListener("click", () => {
-    currentTool = "rect";
+let tool="select";
 
-    // Reset all toolbar buttons
-    document.querySelectorAll(".toolbar button").forEach(btn => {
-        btn.style.background = "#f2f2f2";
-    });
+highlight(selectBtn);
 
-    // Highlight selected tool
-    rectTool.style.background = "#90caf9";
+function highlight(btn){
+
+document.querySelectorAll(".toolbar button").forEach(b=>{
+
+b.style.background="#f2f2f2";
+
 });
 
-// Create Rectangle
-svg.addEventListener("click", function (e) {
+btn.style.background="#90caf9";
 
-    if (currentTool !== "rect") return;
+}
 
-    const rect = svg.getBoundingClientRect();
+selectBtn.onclick=()=>{
 
-    const x = ((e.clientX - rect.left) / rect.width) * 1000;
-    const y = ((e.clientY - rect.top) / rect.height) * 1000;
+tool="select";
 
-    const newRect = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-    );
+highlight(selectBtn);
 
-    newRect.setAttribute("x", x - 40);
-    newRect.setAttribute("y", y - 30);
-    newRect.setAttribute("width", 80);
-    newRect.setAttribute("height", 60);
+};
 
-    newRect.setAttribute("rx", 6);
+rectBtn.onclick=()=>{
 
-    newRect.setAttribute("fill", "#64b5f6");
-    newRect.setAttribute("stroke", "#1565c0");
-    newRect.setAttribute("stroke-width", "2");
+tool="rect";
 
-    svg.appendChild(newRect);
+highlight(rectBtn);
+
+};
+
+svg.on("click",(e)=>{
+
+if(tool!=="rect") return;
+
+const p=svg.point(e.clientX,e.clientY);
+
+const r=svg.rect(120,80)
+.move(p.x-60,p.y-40)
+.radius(8)
+.fill("#64b5f6")
+.stroke({
+color:"#1565c0",
+width:2
+});
+
+r.draggable();
+
+r.on("click",function(ev){
+
+ev.stopPropagation();
+
+if(tool!=="select") return;
+
+this.front();
+
+});
 
 });

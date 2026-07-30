@@ -131,3 +131,13 @@ function selectShape(shape) {
     });
 
 }
+
+deleteBtn.onclick = () => {
+
+    if (!selectedShape) return;
+
+    selectedShape.remove();
+
+    selectedShape = null;
+
+};

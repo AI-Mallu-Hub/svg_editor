@@ -1,52 +1,28 @@
-function enableDragging(enable) {
+let activeShape = null;
 
-    svg.each(function () {
+let dragging = false;
 
-        if (this.type === "rect") {
+let startX = 0;
+let startY = 0;
 
-            this.draggable(enable);
-
-        }
-
-    });
-
-}
+let shapeX = 0;
+let shapeY = 0;
 
 svg.on("click", (e) => {
-
-    if (currentTool === "select") {
-
-        deselectAll();
-
-        return;
-
-    }
 
     if (currentTool !== "rect") return;
 
     const p = svg.point(e.clientX, e.clientY);
 
-    const rect = svg.rect(120, 80)
-        .move(p.x - 60, p.y - 40)
+    const rect = svg.rect(120,80)
+        .move(p.x-60,p.y-40)
         .radius(8)
         .fill("#64b5f6")
         .stroke({
-            color: "#1565c0",
-            width: 2
+            color:"#1565c0",
+            width:2
         });
 
-    rect.draggable(false);
-
-    rect.on("pointerdown", function (ev) {
-
-    if (currentTool !== "select") return;
-
-    ev.stopPropagation();
-
-    this.front();
-
-    selectShape(this);
-
-});
+    attachShapeEvents(rect);
 
 });

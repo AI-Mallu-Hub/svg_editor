@@ -17,6 +17,7 @@ function deselectAll() {
     });
 
     selectedShape = null;
+    activeShape=null;
 
 }
 

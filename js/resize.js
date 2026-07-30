@@ -1,3 +1,5 @@
+const MIN_WIDTH = 40;
+const MIN_HEIGHT = 40;
 let resizing = false;
 
 let resizeHandle = null;
@@ -19,11 +21,11 @@ function createHandles() {
 
     for (let i = 0; i < 4; i++) {
 
-        const h = svg.circle(14)
+        const h = svg.circle(24)
             .fill("#ffffff")
             .stroke({
                 color: "#1e88e5",
-                width: 2
+                width: 3
             });
         h.data("index", i);
 
@@ -122,8 +124,8 @@ switch (resizeHandle) {
         break;
 }
 
-if (w < 20) w = 20;
-if (h < 20) h = 20;
+w = Math.max(MIN_WIDTH, w);
+h = Math.max(MIN_HEIGHT, h);
 
 resizeShape.move(x, y);
 resizeShape.width(w);

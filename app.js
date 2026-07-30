@@ -96,3 +96,6 @@ canvas.addEventListener("pointerup",()=>{
     currentRect=null;
 
 });
+document.getElementById("rectTool").onclick = function () {
+    alert("Rectangle Tool Clicked");
+};

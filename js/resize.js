@@ -7,6 +7,9 @@ let resizeShape = null;
 let startWidth = 0;
 let startHeight = 0;
 
+let startShapeX = 0;
+let startShapeY = 0;
+
 let startPointerX = 0;
 let startPointerY = 0;
 

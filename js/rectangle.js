@@ -67,3 +67,12 @@ window.addEventListener("pointerup",()=>{
     dragging=false;
 
 });
+svg.on("pointerdown",()=>{
+
+    if(currentTool!=="select") return;
+
+    deselectAll();
+
+    activeShape=null;
+
+});

@@ -43,6 +43,9 @@ h.on("pointerdown", function (e) {
 
     startHeight = resizeShape.height();
 
+    startShapeX = resizeShape.x();
+    startShapeY = resizeShape.y();
+
     startPointerX = e.clientX;
 
     startPointerY = e.clientY;
@@ -77,24 +80,59 @@ function hideHandles() {
 
 }
 window.addEventListener("pointermove", (e) => {
-
     if (!resizing) return;
 
-    if (!resizeShape) return;
+if (!resizeShape) return;
 
-    if (resizeHandle !== 3) return;
+if (dragging) return;  
 
     const dx = e.clientX - startPointerX;
+const dy = e.clientY - startPointerY;
 
-    const dy = e.clientY - startPointerY;
+let x = startShapeX;
+let y = startShapeY;
 
-    resizeShape.width(Math.max(20, startWidth + dx));
+let w = startWidth;
+let h = startHeight;
 
-    resizeShape.height(Math.max(20, startHeight + dy));
+switch (resizeHandle) {
 
-    updateHandles(resizeShape);
+    case 0: // Top Left
+        x = startShapeX + dx;
+        y = startShapeY + dy;
+        w = startWidth - dx;
+        h = startHeight - dy;
+        break;
 
+    case 1: // Top Right
+        y = startShapeY + dy;
+        w = startWidth + dx;
+        h = startHeight - dy;
+        break;
+
+    case 2: // Bottom Left
+        x = startShapeX + dx;
+        w = startWidth - dx;
+        h = startHeight + dy;
+        break;
+
+    case 3: // Bottom Right
+        w = startWidth + dx;
+        h = startHeight + dy;
+        break;
+}
+
+if (w < 20) w = 20;
+if (h < 20) h = 20;
+
+resizeShape.move(x, y);
+resizeShape.width(w);
+resizeShape.height(h);
+
+updateHandles(resizeShape);
+    
 });
+    
 window.addEventListener("pointerup", () => {
 
     resizing = false;

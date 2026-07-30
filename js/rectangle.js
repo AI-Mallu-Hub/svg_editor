@@ -26,3 +26,26 @@ svg.on("click", (e) => {
     attachShapeEvents(rect);
 
 });
+function attachShapeEvents(shape){
+
+    shape.on("pointerdown",function(e){
+
+        if(currentTool!=="select") return;
+
+        e.stopPropagation();
+
+        activeShape=this;
+
+        selectShape(this);
+
+        dragging=true;
+
+        startX=e.clientX;
+        startY=e.clientY;
+
+        shapeX=this.x();
+        shapeY=this.y();
+
+    });
+
+}

@@ -68,6 +68,13 @@ rectBtn.onclick = () => {
 svg.on("click",(e)=>{
 
 if(tool!=="rect") return;
+if (tool === "select") {
+
+    deselectAll();
+
+    return;
+
+}
 
 const p=svg.point(e.clientX,e.clientY);
 

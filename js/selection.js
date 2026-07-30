@@ -11,6 +11,7 @@ function deselectAll() {
                 color: "#1565c0",
                 width: 2
             });
+            hideHandles();
 
         }
 

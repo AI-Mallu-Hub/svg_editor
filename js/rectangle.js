@@ -61,7 +61,13 @@ window.addEventListener("pointermove",(e)=>{
 
     const dy=e.clientY-startY;
 
-    activeShape.move(shapeX+dx,shapeY+dy);
+    let newX = shapeX + dx;
+let newY = shapeY + dy;
+
+newX = Math.max(0, newX);
+newY = Math.max(0, newY);
+
+activeShape.move(newX, newY);
 
 });
 window.addEventListener("pointerup",()=>{

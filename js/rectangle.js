@@ -38,6 +38,8 @@ function attachShapeEvents(shape){
 
         activeShape = this;
 
+        activeShape.front();
+
         dragging=true;
 
         startX=e.clientX;
@@ -77,6 +79,8 @@ if (selectedShape === activeShape) {
 window.addEventListener("pointerup",()=>{
 
     dragging=false;
+    shapeX = activeShape ? activeShape.x() : 0;
+shapeY = activeShape ? activeShape.y() : 0;
 
 });
 svg.on("pointerdown",()=>{

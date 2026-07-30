@@ -1,98 +1,51 @@
-const canvas = document.getElementById("canvas");
+// ===== SVG EDITOR - PART 3 =====
+
+const svg = document.getElementById("canvas");
 const rectTool = document.getElementById("rectTool");
 
-canvas.setAttribute("viewBox", "0 0 1000 1000");
+svg.setAttribute("viewBox", "0 0 1000 1000");
 
 let currentTool = "select";
 
-let drawing = false;
-
-let startX = 0;
-let startY = 0;
-
-let currentRect = null;
-
-rectTool.onclick = () => {
-
+// Tool Selection
+rectTool.addEventListener("click", () => {
     currentTool = "rect";
 
-    rectTool.style.background = "#8ec5ff";
+    // Reset all toolbar buttons
+    document.querySelectorAll(".toolbar button").forEach(btn => {
+        btn.style.background = "#f2f2f2";
+    });
 
-};
-
-function getPoint(e){
-
-    const svgPoint = canvas.createSVGPoint();
-
-    const touch = e.touches ? e.touches[0] : e;
-
-    svgPoint.x = touch.clientX;
-    svgPoint.y = touch.clientY;
-
-    return svgPoint.matrixTransform(
-        canvas.getScreenCTM().inverse()
-    );
-
-}
-
-canvas.addEventListener("pointerdown",(e)=>{
-
-    if(currentTool!=="rect") return;
-
-    drawing=true;
-
-    const p=getPoint(e);
-
-    startX=p.x;
-    startY=p.y;
-
-    currentRect=document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect"
-    );
-
-    currentRect.setAttribute("x",startX);
-
-    currentRect.setAttribute("y",startY);
-
-    currentRect.setAttribute("width",0);
-
-    currentRect.setAttribute("height",0);
-
-    currentRect.setAttribute("fill","#4da3ff55");
-
-    currentRect.setAttribute("stroke","#1976d2");
-
-    currentRect.setAttribute("stroke-width","2");
-
-    canvas.appendChild(currentRect);
-
+    // Highlight selected tool
+    rectTool.style.background = "#90caf9";
 });
 
-canvas.addEventListener("pointermove",(e)=>{
+// Create Rectangle
+svg.addEventListener("click", function (e) {
 
-    if(!drawing) return;
+    if (currentTool !== "rect") return;
 
-    const p=getPoint(e);
+    const rect = svg.getBoundingClientRect();
 
-    const w=p.x-startX;
+    const x = ((e.clientX - rect.left) / rect.width) * 1000;
+    const y = ((e.clientY - rect.top) / rect.height) * 1000;
 
-    const h=p.y-startY;
+    const newRect = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+    );
 
-    currentRect.setAttribute("width",Math.abs(w));
+    newRect.setAttribute("x", x - 40);
+    newRect.setAttribute("y", y - 30);
+    newRect.setAttribute("width", 80);
+    newRect.setAttribute("height", 60);
 
-    currentRect.setAttribute("height",Math.abs(h));
+    newRect.setAttribute("rx", 6);
 
-    currentRect.setAttribute("x",w<0?p.x:startX);
+    newRect.setAttribute("fill", "#64b5f6");
+    newRect.setAttribute("stroke", "#1565c0");
+    newRect.setAttribute("stroke-width", "2");
 
-    currentRect.setAttribute("y",h<0?p.y:startY);
-
-});
-
-canvas.addEventListener("pointerup",()=>{
-
-    drawing=false;
-
-    currentRect=null;
+    svg.appendChild(newRect);
 
 });

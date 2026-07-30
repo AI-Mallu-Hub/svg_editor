@@ -30,6 +30,7 @@ function selectShape(shape) {
         color: "#ff3b30",
         width: 4
     });
+    updateHandles(shape);
 
 }
 

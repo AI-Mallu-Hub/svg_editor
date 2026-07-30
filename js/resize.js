@@ -75,6 +75,8 @@ function updateHandles(shape) {
 
     handles.forEach(h => h.show());
 
+    handles.forEach(h => h.front());
+
 }
 function hideHandles() {
 

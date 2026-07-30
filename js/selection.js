@@ -49,7 +49,9 @@ deleteBtn.onclick = () => {
 
     }
 
-    selectedShape.remove();
+    unregisterShape(selectedShape);
+
+selectedShape.remove();
 
 selectedShape = null;
 activeShape = null;

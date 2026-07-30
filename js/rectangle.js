@@ -69,7 +69,9 @@ newY = Math.max(0, newY);
 
 activeShape.move(newX, newY);
 
-updateHandles(activeShape);
+if (selectedShape === activeShape) {
+    updateHandles(activeShape);
+}
 
 });
 window.addEventListener("pointerup",()=>{

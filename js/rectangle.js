@@ -51,6 +51,8 @@ function attachShapeEvents(shape){
 }
 window.addEventListener("pointermove",(e)=>{
 
+    if (resizing) return;
+
     if(!dragging) return;
 
     if(!activeShape) return;

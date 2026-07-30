@@ -100,7 +100,7 @@ r.on("click", function (ev) {
     selectShape(this);
 
 });
-    
+ });
 function deselectAll() {
 
     svg.each(function () {

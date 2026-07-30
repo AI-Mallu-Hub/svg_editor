@@ -19,3 +19,23 @@ function createHandles() {
     }
 
 }
+function updateHandles(shape) {
+
+    const box = shape.bbox();
+
+    handles[0].center(box.x, box.y);
+
+    handles[1].center(box.x2, box.y);
+
+    handles[2].center(box.x, box.y2);
+
+    handles[3].center(box.x2, box.y2);
+
+    handles.forEach(h => h.show());
+
+}
+function hideHandles() {
+
+    handles.forEach(h => h.hide());
+
+}

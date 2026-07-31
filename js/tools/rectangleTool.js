@@ -26,6 +26,7 @@ function createRectangle(x, y) {
 }
 
 svg.on("click", (e) => {
+    console.log("Rectangle Click");
 
     if (currentTool !== "rect") return;
 

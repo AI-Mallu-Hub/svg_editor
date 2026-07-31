@@ -1,5 +1,7 @@
 const rectBtn = document.getElementById("rectTool");
 const circleBtn = document.getElementById("circleTool");
+const lineBtn = document.getElementById("lineTool");
+
 const selectBtn = document.getElementById("selectTool");
 const deleteBtn = document.getElementById("deleteTool");
 
@@ -40,6 +42,16 @@ circleBtn.onclick = () => {
     currentTool = "circle";
 
     highlightTool(circleBtn);
+
+    enableDragging(false);
+
+};
+
+lineBtn.onclick = () => {
+
+    currentTool = "line";
+
+    highlightTool(lineBtn);
 
     enableDragging(false);
 

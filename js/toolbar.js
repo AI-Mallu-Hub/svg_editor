@@ -1,5 +1,5 @@
-
 const rectBtn = document.getElementById("rectTool");
+const circleBtn = document.getElementById("circleTool");
 const selectBtn = document.getElementById("selectTool");
 const deleteBtn = document.getElementById("deleteTool");
 
@@ -12,6 +12,7 @@ function highlightTool(button) {
     });
 
     button.style.background = "#90caf9";
+
 }
 
 selectBtn.onclick = () => {
@@ -29,6 +30,16 @@ rectBtn.onclick = () => {
     currentTool = "rect";
 
     highlightTool(rectBtn);
+
+    enableDragging(false);
+
+};
+
+circleBtn.onclick = () => {
+
+    currentTool = "circle";
+
+    highlightTool(circleBtn);
 
     enableDragging(false);
 
